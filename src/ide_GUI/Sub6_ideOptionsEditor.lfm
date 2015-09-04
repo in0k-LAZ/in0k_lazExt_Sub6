@@ -1,0 +1,19 @@
+object Sub6_ideOptionsEditor: TSub6_ideOptionsEditor
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  TabOrder = 0
+  DesignLeft = 246
+  DesignTop = 114
+  object CheckBox1: TCheckBox
+    Left = 23
+    Height = 19
+    Top = 24
+    Width = 78
+    Caption = 'CheckBox1'
+    TabOrder = 0
+  end
+end

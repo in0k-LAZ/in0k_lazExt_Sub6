@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="in0k_lazExt_Sub6"/>
+    <Type Value="DesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <IncludeFiles Value="src"/>
+        <OtherUnitFiles Value="src;src\ide_GUI;src\ide_Macros;src\ide_Debug"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files Count="10">
+      <Item1>
+        <Filename Value="src\Sub6_REG.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="Sub6_REG"/>
+      </Item1>
+      <Item2>
+        <Filename Value="src\Sub6.pas"/>
+        <UnitName Value="Sub6"/>
+      </Item2>
+      <Item3>
+        <Filename Value="src\ide_Macros\Sub6_ideMacro.pas"/>
+        <UnitName Value="Sub6_ideMacro"/>
+      </Item3>
+      <Item4>
+        <Filename Value="src\ide_Macros\Sub6_ideMacro_LIST.pas"/>
+        <UnitName Value="Sub6_ideMacro_LIST"/>
+      </Item4>
+      <Item5>
+        <Filename Value="src\ide_GUI\Sub6_ideOptionsEditor.pas"/>
+        <UnitName Value="Sub6_ideOptionsEditor"/>
+      </Item5>
+      <Item6>
+        <Filename Value="src\ide_GUI\Sub6_ideOptionsConfig.pas"/>
+        <UnitName Value="Sub6_ideOptionsConfig"/>
+      </Item6>
+      <Item7>
+        <Filename Value="src\ide_GUI\Sub6_ideProjectResources.pas"/>
+        <UnitName Value="Sub6_ideProjectResources"/>
+      </Item7>
+      <Item8>
+        <Filename Value="src\Sub6_INI.inc"/>
+        <Type Value="Binary"/>
+      </Item8>
+      <Item9>
+        <Filename Value="src\ide_Debug\Sub6_wndDebug.lfm"/>
+        <Type Value="LFM"/>
+      </Item9>
+      <Item10>
+        <Filename Value="src\ide_Debug\Sub6_wndDebug.pas"/>
+        <UnitName Value="Sub6_wndDebug"/>
+      </Item10>
+    </Files>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="IDEIntf"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
