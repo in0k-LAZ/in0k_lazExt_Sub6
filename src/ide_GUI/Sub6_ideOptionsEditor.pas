@@ -7,7 +7,7 @@ interface
 
 uses {$ifDef lazExt_Sub6_EventLOG_mode}Sub6_wndDebug,{$endIf}
 
-
+     Sub6,
 IDEOptionsIntf, ProjectIntf, ProjectResourcesIntf, StdCtrls,
   Sub6_ideOptionsConfig,Sub6_ideProjectResources, Dialogs;
 
@@ -18,116 +18,85 @@ type
   TSub6_ideOptionsEditor = class(TAbstractIDEOptionsEditor)
     CheckBox1: TCheckBox;
   public
-    function GetTitle:string; override;
-    procedure Setup(ADialog: TAbstractOptionsEditorDialog);  override;
-    procedure ReadSettings(AOptions: TAbstractIDEOptions);   override;
-    procedure WriteSettings(AOptions: TAbstractIDEOptions);  override;
     class function SupportedOptionsClass: TAbstractIDEOptionsClass; override;
+  public
+    function GetTitle:string; override;
+  public
+    procedure Setup(ADialog:TAbstractOptionsEditorDialog);  override;
+    procedure ReadSettings(AOptions:TAbstractIDEOptions);   override;
+    procedure WriteSettings(AOptions:TAbstractIDEOptions);  override;
   end;
 
 implementation
 
 {$R *.lfm}
 
-
-type
-_tSub6_Project_=class(TLazProject)
-  protected
-    function _getIdeOPTIONs_:tSub6_ideProjectResources;
-  end;
-
-function _tSub6_Project_._getIdeOPTIONs_:tSub6_ideProjectResources;
-var i:integer;
+function TSub6_ideOptionsEditor.GetTitle:String;
 begin
-
-  result:=tSub6_ideProjectResources(TAbstractProjectResources(Resources).Resource[tSub6_ideProjectResources]);
-  if Assigned(result)
-  then ShowMessage('resource FIND:'+result.ClassName)
-  else ShowMessage('resource NOT FIND');
-
-  {
-
-  for i := 0 to Resources.Count - 1 do
-  begin
-    Result := TAbstractProjectResource(FResources[i]);
-    if Result.InheritsFrom(AIndex) then
-      Exit;
-  end;
-  Result := nil;
-end;
-    Result := TProjectVersionInfo(GetProjectResource(TProjectVersionInfo));
-  }
-end;
-
-
-
-
-
-
-
-class function TSub6_ideOptionsEditor.SupportedOptionsClass:TAbstractIDEOptionsClass;
-begin
-    result:=tSub6_ideOptionsConfig;
-    {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.SupportedOptionsClass '+addr2txt(result));
-    {$endIf}
+    result:='Sub6';
 end;
 
 //------------------------------------------------------------------------------
 
-function TSub6_ideOptionsEditor.GetTitle:String;
+procedure TSub6_ideOptionsEditor.Setup(ADialog:TAbstractOptionsEditorDialog);
 begin
-    {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.GetTitle');
-    {$endIf}
-    result:='Sub6';
-end;
-
-procedure TSub6_ideOptionsEditor.Setup(ADialog: TAbstractOptionsEditorDialog);
-begin
-    {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.Setup');
-    {$endIf}
+    CheckBox1.Checked:=false;
+    //----
     {$ifDef lazExt_Sub6_EventLOG_mode}
         DEBUG(self.ClassName+'.Setup <<< END');
     {$endIf}
 end;
 
-procedure TSub6_ideOptionsEditor.ReadSettings(AOptions: TAbstractIDEOptions);
+//------------------------------------------------------------------------------
+
+procedure TSub6_ideOptionsEditor.ReadSettings(AOptions:TAbstractIDEOptions);
+var Sub6_RSRC:tSub6_ideProjectResources;
 begin
+    Sub6_RSRC:=Sub6_INSTANCE.ActiveProject_Sub6Resources;
+    if Assigned(Sub6_RSRC) then begin
+       CheckBox1.Checked:=Sub6_RSRC.used;
+       {$ifDef lazExt_Sub6_EventLOG_mode}
+           DEBUG(self.ClassName+'.ReadSettings [ Sub6_RSRC'+addr2txt(Sub6_RSRC)+']');
+       {$endIf}
+    end
     {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.ReadSettings');
-    {$endIf}
-    if Assigned(AOptions) //and
-       //(TObject(AOptions). is TLazProject)
-    then begin
-       CheckBox1.Checked:=_tSub6_Project_(TObject(AOptions))._getIdeOPTIONs_.used;
-    end;
-    {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.ReadSettings <<< END');
-    {$endIf}
+    else begin
+        DEBUG(self.ClassName+'.ReadSettings [ERR]:Sub6_RSRC=NIL');
+    end
+    {$endIf};
 end;
 
-procedure TSub6_ideOptionsEditor.WriteSettings(AOptions: TAbstractIDEOptions);
+procedure TSub6_ideOptionsEditor.WriteSettings(AOptions:TAbstractIDEOptions);
+var Sub6_RSRC:tSub6_ideProjectResources;
 begin
+    Sub6_RSRC:=Sub6_INSTANCE.ActiveProject_Sub6Resources;
+    if Assigned(Sub6_RSRC) then begin
+        Sub6_RSRC.used:=CheckBox1.Checked;
+        {$ifDef lazExt_Sub6_EventLOG_mode}
+            DEBUG(self.ClassName+'.WriteSettings [ Sub6_RSRC'+addr2txt(Sub6_RSRC)+']');
+        {$endIf}
+    end
     {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.WriteSettings');
-    {$endIf}
-    if Assigned(AOptions) //and
-       //(TObject(AOptions) is TLazProject)
-    then begin
-       _tSub6_Project_(TObject(AOptions))._getIdeOPTIONs_.used:=CheckBox1.Checked;
-    end;
-    {$ifDef lazExt_Sub6_EventLOG_mode}
-        DEBUG(self.ClassName+'.WriteSettings <<< END');
-    {$endIf}
+    else begin
+        DEBUG(self.ClassName+'.WriteSettings [ERR]:Sub6_RSRC=NIL');
+    end
+    {$endIf};
 end;
 
+//------------------------------------------------------------------------------
 
-initialization
-
-  //RegisterIDEOptionsEditor(GroupProject, TSub6_ideOptionsEditor, ProjectOptionsVersionInfo-1);
-
+class function TSub6_ideOptionsEditor.SupportedOptionsClass:TAbstractIDEOptionsClass;
+begin // почемуто если тут указываем какой-то класс, то оно нифига не работет
+      // нет вызовов ReadSettings и WriteSettings ... разбираться нада
+      // в данном случае у нас есть обходной путь, которым и воспользуемся
+      {todo : need brain}
+    result:=nil;
+    {$ifDef lazExt_Sub6_EventLOG_mode}
+        //if Assigned(result)
+        //then DEBUG(self.ClassName+'.SupportedOptionsClass = '+addr2txt(result)+' : '+result.ClassName)
+        //else DEBUG(self.ClassName+'.SupportedOptionsClass = NIL');
+    {$endIf}
+end;
 
 end.
 

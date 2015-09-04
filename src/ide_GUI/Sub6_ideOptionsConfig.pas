@@ -11,7 +11,7 @@ uses {$ifDef lazExt_Sub6_EventLOG_mode}Sub6_wndDebug,{$endIf}
 
 type
 
- tSub6_ideOptionsConfig=class(TAbstractIDEOptions)
+ tSub6_ideOptionsConfig=class(TAbstractIDEEnvironmentOptions)
   public
     class function GetGroupCaption:string;          override;
     class function GetInstance:TAbstractIDEOptions; override;
@@ -24,7 +24,7 @@ begin
     {$ifDef lazExt_Sub6_EventLOG_mode}
         DEBUG(self.ClassName+'.GetGroupCaption >>><<<');
     {$endIf}
-    result:='Project Options';
+    result:='Sub6';
 end;
 
 {type
@@ -57,8 +57,13 @@ begin
     {$endIf}
 end;
 
+
+var i:tSub6_ideOptionsConfig;
+
 initialization
-  RegisterIDEOptionsGroup(GroupProject+1, tSub6_ideOptionsConfig);
+  i:= tSub6_ideOptionsConfig.Create;
+
+  //RegisterIDEOptionsGroup(GroupProject+1, tSub6_ideOptionsConfig);
 
 
 end.
