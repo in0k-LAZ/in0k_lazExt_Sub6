@@ -12,6 +12,14 @@ uses Sub6_ideProjectResources,Classes, SysUtils,
 
 type
 
+ tSub6_node=class
+  protected
+  _IDNT_:string; //< строка иденификатор (`ProductName`, `LegalTrademarks` ...)
+
+  public
+   // constructor Create(const identifier:string); virtual;
+  end;
+
   // ГЛАВНЫЙ класс расширения. Связывает воедино весь функционал.
  tSub6=class
 
@@ -70,15 +78,16 @@ begin
 
 end;
 
+// получть ЭКЗЕМПЛЯР ресурсов 'Sub6' для текущего АКТИВНОГО проекта
 function tSub6.ActiveProject_Sub6Resources:tSub6_ideProjectResources;
 begin
     result:=nil;
-    if Assigned(LazarusIDE.ActiveProject) then begin //< ??? а надо ли
-        result:=_tSub6_Project_(LazarusIDE.ActiveProject)._getIdeOPTIONs_;
-
-
-      //LazarusIDE.ActiveProject.Resources;
-
+    if Assigned(LazarusIDE) and                     //< -- такое чуство что
+       Assigned(LazarusIDE.ActiveProject) and       //<    проверок слишком
+       Assigned(LazarusIDE.ActiveProject.Resources) //<    много
+    then begin
+        with TAbstractProjectResources(LazarusIDE.ActiveProject.Resources)
+        do result:=tSub6_ideProjectResources(Resource[tSub6_ideProjectResources]);
     end;
 end;
 

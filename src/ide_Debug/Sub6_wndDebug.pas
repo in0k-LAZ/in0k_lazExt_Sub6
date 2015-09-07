@@ -41,6 +41,9 @@ function  addr2str(const p:pointer):string; inline;
 function  addr2txt(const p:pointer):string; inline;
 function  mthd2txt(const p:pMethod):string; inline;
 
+function  ptrI2str(const p:PtrInt ):string; inline;
+function  ptrI2txt(const p:PtrInt ):string; inline;
+
 implementation
 const _c_WndDBG_Caption_='[eventLog] Sub6';
 
@@ -96,6 +99,17 @@ function addr2txt(const p:pointer):string;
 begin
     result:=_c_addr2txt_SMB_+addr2str(p);
 end;
+
+function ptrI2str(const p:PtrInt ):string;
+begin
+    result:=IntToHex(p,sizeOf(PtrUint)*2);
+end;
+
+function ptrI2txt(const p:PtrInt ):string;
+begin
+    result:=_c_addr2txt_SMB_+ptrI2str(p);
+end;
+
 
 function mthd2txt(const p:pMethod):string;
 begin

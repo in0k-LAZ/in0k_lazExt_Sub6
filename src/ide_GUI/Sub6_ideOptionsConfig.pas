@@ -1,7 +1,6 @@
 unit Sub6_ideOptionsConfig;
 
 {$mode objfpc}{$H+}
-
 interface
 {$I Sub6_INI.inc}
 
