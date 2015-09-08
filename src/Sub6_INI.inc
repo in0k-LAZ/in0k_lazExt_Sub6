@@ -11,3 +11,5 @@
 //  View -> IDE Internals -> [eventLog] lazExt_aBTF_ObjectInspector
 {$define lazExt_Sub6_EventLOG_mode}
 
+{$define lazExt_Sub6_DEBUG_mode}
+

@@ -9,11 +9,11 @@
       <PathDelim Value="\"/>
       <SearchPaths>
         <IncludeFiles Value="src"/>
-        <OtherUnitFiles Value="src;src\ide_GUI;src\ide_Macros;src\ide_Debug"/>
+        <OtherUnitFiles Value="src;src\ide_GUI;src\project_node;src\ide_Macros;src\ide_Debug"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="10">
+    <Files Count="11">
       <Item1>
         <Filename Value="src\Sub6_REG.pas"/>
         <HasRegisterProc Value="True"/>
@@ -24,12 +24,12 @@
         <UnitName Value="Sub6"/>
       </Item2>
       <Item3>
-        <Filename Value="src\ide_Macros\Sub6_ideMacro.pas"/>
-        <UnitName Value="Sub6_ideMacro"/>
+        <Filename Value="src\ide_TransferMacro\Sub6_TransferMacro.pas"/>
+        <UnitName Value="Sub6_TransferMacro"/>
       </Item3>
       <Item4>
-        <Filename Value="src\ide_Macros\Sub6_ideMacro_LIST.pas"/>
-        <UnitName Value="Sub6_ideMacro_LIST"/>
+        <Filename Value="src\project_node\Sub6_nodesList.pas"/>
+        <UnitName Value="Sub6_nodesList"/>
       </Item4>
       <Item5>
         <Filename Value="src\ide_GUI\Sub6_ideOptionsEditor.pas"/>
@@ -55,6 +55,10 @@
         <Filename Value="src\ide_Debug\Sub6_wndDebug.pas"/>
         <UnitName Value="Sub6_wndDebug"/>
       </Item10>
+      <Item11>
+        <Filename Value="src\project_node\Sub6_node.pas"/>
+        <UnitName Value="Sub6_node"/>
+      </Item11>
     </Files>
     <RequiredPkgs Count="2">
       <Item1>

@@ -53,6 +53,10 @@ begin
     with TXMLConfig(AConfig) do begin
         used:=GetValue(_getConfigPATH_(Path)+'USED', False);
     end;
+    //---
+    //---
+
+
     {$ifDef lazExt_Sub6_EventLOG_mode}
         DEBUG(self.ClassName+'.ReadFromProjectFile : '+Path);
     {$endIf}

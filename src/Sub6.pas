@@ -5,24 +5,19 @@ unit Sub6;
 interface
 
 uses Sub6_ideProjectResources,Classes, SysUtils,
-       ProjectIntf,
+
+Sub6_node,
+ProjectIntf,
        ProjectResourcesIntf,
   LazIDEIntf;
 
 
 type
 
- tSub6_node=class
-  protected
-  _IDNT_:string; //< строка иденификатор (`ProductName`, `LegalTrademarks` ...)
-
-  public
-   // constructor Create(const identifier:string); virtual;
-  end;
-
   // ГЛАВНЫЙ класс расширения. Связывает воедино весь функционал.
  tSub6=class
-
+  public
+    function NodeLIST_Insert(const List:tSub6_nodeList_core; Node:tSub6_node):boolean;
 
   public
     function _Sub6Resources_find_(const prj:TLazProject):tSub6_ideProjectResources;
@@ -90,6 +85,26 @@ begin
         do result:=tSub6_ideProjectResources(Resource[tSub6_ideProjectResources]);
     end;
 end;
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+function tSub6.NodeLIST_Insert(const List:tSub6_nodeList_core; Node:tSub6_node):boolean;
+begin
+    //result:=List.Insert(Node);
+end;
+
+
+
+
+
+
+
+
+
+
 
 //------------------------------------------------------------------------------
 

@@ -1,12 +1,11 @@
 unit Sub6_REG;
 
 {$mode objfpc}{$H+}
-
 interface
 {$I Sub6_INI.inc}
  uses
 {$ifDef lazExt_Sub6_EventLOG_mode}Sub6_wndDebug,{$endIf}
-    Sub6,  Sub6_ideMacro, MacroIntf,
+    Sub6,  Sub6_TransferMacro, MacroIntf,
 Sub6_ideOptionsEditor, Sub6_ideProjectResources,
   IDEOptionsIntf, ProjectResourcesIntf;
 

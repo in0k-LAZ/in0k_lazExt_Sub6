@@ -1,11 +1,10 @@
-unit Sub6_ideMacro_LIST;
+unit Sub6_nodesList;
 
 {$mode objfpc}{$H+}
 
 interface
 
-uses
-  Classes, SysUtils;
+uses tSub6_node;
 
 
 type
